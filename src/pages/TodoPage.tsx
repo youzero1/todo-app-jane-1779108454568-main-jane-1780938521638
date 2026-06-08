@@ -1,9 +1,10 @@
 import styles from './TodoPage.module.css';
 import { useTodos } from '@/hooks/useTodos';
+import { useTheme } from '@/hooks/useTheme';
 import TodoInput from '@/components/TodoInput';
 import TodoList from '@/components/TodoList';
 import TodoFooter from '@/components/TodoFooter';
-import { CheckSquare } from 'lucide-react';
+import { CheckSquare, Sun, Moon } from 'lucide-react';
 
 export default function TodoPage() {
   const {
@@ -21,6 +22,8 @@ export default function TodoPage() {
     completedCount,
   } = useTodos();
 
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -30,6 +33,14 @@ export default function TodoPage() {
           </div>
           <h1 className={styles.title}>My Todos</h1>
           <p className={styles.subtitle}>Stay organized, get things done.</p>
+          <button
+            className={styles.themeToggle}
+            onClick={toggleTheme}
+            aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+            title={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+          >
+            {theme === 'light' ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
         </header>
 
         <main className={styles.main}>
